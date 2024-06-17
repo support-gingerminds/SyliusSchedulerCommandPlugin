@@ -37,6 +37,10 @@ class ScheduleCommandRunner implements ScheduleCommandRunnerInterface
             $this->kernel->getProjectDir(),
         );
 
+        $process->setEnv(array(
+            'PATH' => sprintf('/home/www/lescuyer-pp/bin:%s', getenv('PATH')),
+        ));
+
         $scheduledCommand->setExecutedAt(new \DateTime());
         $process->setTimeout($scheduledCommand->getTimeout());
         $process->setIdleTimeout($scheduledCommand->getIdleTimeout());
@@ -60,6 +64,10 @@ class ScheduleCommandRunner implements ScheduleCommandRunnerInterface
         $process = Process::fromShellCommandline($this->getCommandLine($scheduledCommand));
         $process->setTimeout($scheduledCommand->getTimeout());
         $process->setIdleTimeout($scheduledCommand->getIdleTimeout());
+
+        $process->setEnv(array(
+            'PATH' => sprintf('/home/www/lescuyer-pp/bin:%s', getenv('PATH')),
+        ));
 
         try {
             $this->startProcess($process);
