@@ -27,7 +27,7 @@ class ScheduledCommandPlanner implements ScheduledCommandPlannerInterface
         /** @var ScheduledCommandInterface[] $scheduledCommands */
         $scheduledCommands = $this->scheduledCommandRepository->findBy([
             'command' => $command->getCommand(),
-            'state' => ScheduledCommandStateEnum::WAITING,
+            'state' => [ScheduledCommandStateEnum::WAITING, ScheduledCommandStateEnum::IN_PROGRESS],
         ]);
 
         if (0 !== count($scheduledCommands)) {
