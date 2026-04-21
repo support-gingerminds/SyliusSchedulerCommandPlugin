@@ -43,6 +43,9 @@ class SoftLimitThresholdIsDueChecker implements IsDueCheckerInterface
         $previousRunDateThreshold = (clone $previousRunDate)->add(new \DateInterval(\sprintf('PT%dM', $this->threshold)));
 
         $lastCreatedScheduledCommand = $this->scheduledCommandRepository->findLastCreatedCommand($command);
+        if ($lastCreatedScheduledCommand !== null && $lastCreatedScheduledCommand->getState() === ScheduledCommandStateEnum::IN_PROGRESS) {
+            throw new IsNotDueException();
+        }
 
         // if never, do my command is valid for the least "threshold" minutes
         if ($lastCreatedScheduledCommand === null) {
