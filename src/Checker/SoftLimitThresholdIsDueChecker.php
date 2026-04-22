@@ -7,6 +7,7 @@ namespace Synolia\SyliusSchedulerCommandPlugin\Checker;
 use Cron\CronExpression;
 use Synolia\SyliusSchedulerCommandPlugin\Components\Exceptions\Checker\IsNotDueException;
 use Synolia\SyliusSchedulerCommandPlugin\Entity\CommandInterface;
+use Synolia\SyliusSchedulerCommandPlugin\Enum\ScheduledCommandStateEnum;
 use Synolia\SyliusSchedulerCommandPlugin\Repository\ScheduledCommandRepositoryInterface;
 
 class SoftLimitThresholdIsDueChecker implements IsDueCheckerInterface
